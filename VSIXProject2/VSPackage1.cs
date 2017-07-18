@@ -71,19 +71,20 @@ namespace VSIXProject2
         /// </summary>
         protected override void Initialize()
         {
-            base.Initialize();
-            Command1.Initialize(this);
-
-            //  Application.Current.MainWindow.Loaded 
-
-            DTE dTE = (DTE)this.GetService(typeof(DTE));
-            this.b = dTE.Events.DTEEvents;
-            //     this.b.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(this, (UIntPtr)ldftn(a));
-
-            Connector c = new Connector();
+            base.Initialize();           
 
             try
             {
+                Command1.Initialize(this);
+
+                //  Application.Current.MainWindow.Loaded 
+
+                DTE dTE = (DTE)this.GetService(typeof(DTE));
+                this.b = dTE.Events.DTEEvents;
+                //     this.b.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(this, (UIntPtr)ldftn(a));
+
+                Connector c = new Connector();
+
                 var ms = this.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
 
                 object obj = null;
