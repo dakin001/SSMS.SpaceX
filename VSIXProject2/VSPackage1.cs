@@ -82,7 +82,22 @@ namespace VSIXProject2
 
             Connector c = new Connector();
 
-            var ss = this.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
+            try
+            {
+                var ms = this.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
+
+                object obj = null;
+                ms.GetCurrentElementValue(1, out obj);
+                var vf = obj as IVsWindowFrame;
+
+                vf.GetProperty(-3001, out obj);
+                var control = obj as Control;
+            }
+            catch
+            {
+                throw;
+            }
+           
         }
 
 
