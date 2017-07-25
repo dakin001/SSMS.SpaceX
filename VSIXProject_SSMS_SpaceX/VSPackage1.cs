@@ -76,8 +76,7 @@ namespace VSIXProject2
             try
             {
                 MessageBox.Show("VSPackage1.Initialize");
-                InitCmd();
-                //Command1.Initialize(this);
+                Command1.Initialize(this);
 
                 //  Application.Current.MainWindow.Loaded 
 
@@ -87,9 +86,6 @@ namespace VSIXProject2
 
                 Connector c = new Connector();
 
-                GetGrid();
-
-
             }
             catch
             {
@@ -98,35 +94,6 @@ namespace VSIXProject2
 
         }
 
-        private void GetGrid()
-        {
-            var ms = this.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
-
-            object obj = null;
-
-            ms.GetCurrentElementValue((int)VSConstants.VSSELELEMID.SEID_WindowFrame, out obj);
-            var vf = obj as IVsWindowFrame;
-
-
-            vf.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out obj);
-            vf.GetProperty((int)__VSFPROPID.VSFPROPID_DocData, out obj);
-            var control = obj as Control;
-        }
-
-        private void InitCmd()
-        {
-            OleMenuCommandService commandService = this.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (commandService != null)
-            {
-                var menuCommandID = new CommandID(new Guid("e5c36492-00e2-4a31-88c9-ac433af1adc4"), 0x0100);
-                var menuItem = new MenuCommand((object sender, EventArgs e) =>
-                {
-                    GetGrid();
-
-                }, menuCommandID);
-                commandService.AddCommand(menuItem);
-            }
-        }
 
 
         #endregion
