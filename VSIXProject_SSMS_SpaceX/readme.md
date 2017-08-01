@@ -13,4 +13,6 @@ SkipLoading.2016.reg
 ========
 资料? https://sqljudo.wordpress.com/31-days-of-sql-server-management-studio/ssms-day-30-vspackage-and-ssms/
 
- 
+Extensibility in Visual Studio
+https://msdn.microsoft.com/zh-CN/library/bb166030.aspx 
+

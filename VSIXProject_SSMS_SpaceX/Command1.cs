@@ -226,5 +226,18 @@ namespace VSIXProject2
                 data.Add(row);
             }
         }
+
+        private string GetExecSQL()
+        {
+            string contentSql = string.Empty;
+            var textDoc = (TextDocument)this.DTE.ActiveDocument.Object();
+            contentSql = textDoc.Selection.Text;
+            if (string.IsNullOrWhiteSpace(contentSql))
+            {
+                contentSql = textDoc.StartPoint.CreateEditPoint().GetText(textDoc.EndPoint);
+            }
+
+            return contentSql;
+        }
     }
 }
