@@ -42,6 +42,8 @@ namespace VSIXProject2
     [Guid(VSPackage1.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
+    // 插件加载时间
+    [ProvideAutoLoad(UIContextGuids80.ToolboxInitialized, PackageAutoLoadFlags.None)]
     public sealed class VSPackage1 : Package
     {
         /// <summary>

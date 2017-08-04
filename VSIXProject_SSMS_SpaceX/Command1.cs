@@ -132,7 +132,19 @@ namespace VSIXProject2
         private void CreateGridMenu()
         {
             var cmd = (CommandBar)((CommandBars)this.DTE.CommandBars)["SQL Results Grid Tab Context"];
-            //   cmd.Controls.Add(vsCommandControlType.vsCommandControlTypeButton,"",);
+            CommandBarPopup menuSpaceX = (CommandBarPopup)cmd.Controls.Add(MsoControlType.msoControlPopup, Type.Missing, Type.Missing, Type.Missing, true);
+            menuSpaceX.Caption = "SpaceX";
+            menuSpaceX.BeginGroup = true;
+            CommandBarControl oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true);
+            oControl.Caption = "===Save data to script===";
+
+            var e = (CommandBarEvents)this.DTE.Events.CommandBarEvents[oControl];
+            e.Click += Menu_Click;
+        }
+
+        private void Menu_Click(object CommandBarControl, ref bool Handled, ref bool CancelDefault)
+        {
+            Script();
         }
 
         private void Script()
@@ -244,7 +256,7 @@ namespace VSIXProject2
         private void SetDocSql(string sql)
         {
             var textDoc = (TextDocument)this.DTE.ActiveDocument.Object(null);
-            textDoc.EndPoint.CreateEditPoint().Insert(sql);
+            textDoc.StartPoint.CreateEditPoint().Insert(sql);
         }
     }
 }
