@@ -176,6 +176,8 @@ namespace VSIXProject2
 
                 result = $"-- INSERT INTO #tmp_GridResults ({string.Join(", ", columnHeaderList)})\r\n"
                     + $"select * from(values \r\n {result}\r\n) as T({string.Join(", ", columnHeaderList)})";
+
+                SetDocSql(result);
             }
         }
 
@@ -238,6 +240,11 @@ namespace VSIXProject2
             }
 
             return contentSql;
+        }
+        private void SetDocSql(string sql)
+        {
+            var textDoc = (TextDocument)this.DTE.ActiveDocument.Object(null);
+            textDoc.EndPoint.CreateEditPoint().Insert(sql);
         }
     }
 }
