@@ -170,6 +170,15 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Validation.15.0.82\lib\net45\Microsoft.VisualStudio.Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SQLEditors">
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\Extensions\Application\SQLEditors.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlPackageBase">
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\SqlPackageBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlWorkbench.Interfaces">
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\SqlWorkbench.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>

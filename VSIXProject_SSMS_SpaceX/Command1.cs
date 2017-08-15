@@ -135,14 +135,12 @@ namespace VSIXProject2
             CommandBarPopup menuSpaceX = (CommandBarPopup)cmd.Controls.Add(MsoControlType.msoControlPopup, Type.Missing, Type.Missing, Type.Missing, true);
             menuSpaceX.Caption = "SpaceX";
             menuSpaceX.BeginGroup = true;
-            CommandBarControl oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true);
+            var oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true) as CommandBarButton;
             oControl.Caption = "===Save data to script===";
-
-            var e = (CommandBarEvents)this.DTE.Events.CommandBarEvents[oControl];
-            e.Click += Menu_Click;
+            oControl.Click += OControl_Click;
         }
 
-        private void Menu_Click(object CommandBarControl, ref bool Handled, ref bool CancelDefault)
+        private void OControl_Click(CommandBarButton Ctrl, ref bool CancelDefault)
         {
             Script();
         }
@@ -255,8 +253,9 @@ namespace VSIXProject2
         }
         private void SetDocSql(string sql)
         {
+            Microsoft.SqlServer.Management.UI.VSIntegration.Editors.ScriptFactory.Instance.CreateNewBlankScript(Microsoft.SqlServer.Management.UI.VSIntegration.Editors.ScriptType.Sql);
             var textDoc = (TextDocument)this.DTE.ActiveDocument.Object(null);
-            textDoc.StartPoint.CreateEditPoint().Insert(sql);
+            textDoc.EndPoint.CreateEditPoint().Insert(sql);
         }
     }
 }
