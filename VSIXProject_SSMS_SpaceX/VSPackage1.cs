@@ -77,16 +77,10 @@ namespace VSIXProject2
 
             try
             {
-                MessageBox.Show("VSPackage1.Initialize");
+                //                MessageBox.Show("VSPackage1.Initialize");
                 Command1.Initialize(this);
 
-                //  Application.Current.MainWindow.Loaded 
-
-                DTE dTE = (DTE)this.GetService(typeof(DTE));
-                this.b = dTE.Events.DTEEvents;
-                //     this.b.OnBeginShutdown += new _dispDTEEvents_OnBeginShutdownEventHandler(this, (UIntPtr)ldftn(a));
-
-                Connector c = new Connector();
+                //  Connector c = new Connector();
 
             }
             catch

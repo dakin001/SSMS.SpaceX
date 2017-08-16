@@ -131,18 +131,17 @@ namespace VSIXProject2
 
         private void CreateGridMenu()
         {
-            var cmd = (CommandBar)((CommandBars)this.DTE.CommandBars)["SQL Results Grid Tab Context"];
-            CommandBarPopup menuSpaceX = (CommandBarPopup)cmd.Controls.Add(MsoControlType.msoControlPopup, Type.Missing, Type.Missing, Type.Missing, true);
-            menuSpaceX.Caption = "SpaceX";
-            menuSpaceX.BeginGroup = true;
-            var oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true) as CommandBarButton;
+            CommandBar tabContext = ((CommandBars)this.DTE.CommandBars)["SQL Results Grid Tab Context"];
+            //CommandBarPopup menuSpaceX = (CommandBarPopup)tabContext.Controls.Add(MsoControlType.msoControlPopup, Type.Missing, Type.Missing, Type.Missing, true);
+            //menuSpaceX.Caption = "SpaceX";
+            //menuSpaceX.BeginGroup = true;
+            //var oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true) as CommandBarButton;
+            var oControl = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
             oControl.Caption = "===Save data to script===";
-            oControl.Click += OControl_Click;
-        }
-
-        private void OControl_Click(CommandBarButton Ctrl, ref bool CancelDefault)
-        {
-            Script();
+            oControl.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
+            {
+                Script();
+            };
         }
 
         private void Script()
