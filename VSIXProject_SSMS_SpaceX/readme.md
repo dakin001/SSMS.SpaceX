@@ -15,3 +15,6 @@ https://msdn.microsoft.com/zh-CN/library/bb166030.aspx
 
 ========
 
+
+ regedit
+ HKEY_CURRENT_USER\SOFTWARE\Microsoft\SQL Server Management Studio\13.0_Config\Packages\{3b76e61c-fe19-493b-b881-23b5e4fc30a5}
