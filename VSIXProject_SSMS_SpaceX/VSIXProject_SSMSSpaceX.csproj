@@ -74,7 +74,10 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="Resources\Command1.png" />
-    <Content Include="Resources\VSPackage1.ico" />
+    <Content Include="Resources\VSPackage1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="stylesheet.css" />
     <None Include="readme.md" />
     <VSCTCompile Include="VSPackage1.vsct">

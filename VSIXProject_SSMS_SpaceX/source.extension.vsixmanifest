@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="VSIXProject2.Dakin Deng.92da22cc-86c2-477d-8a47-c399f3e30251" Version="1.0" Language="en-US" Publisher="Dakin Deng" />
     <DisplayName>VSIXProject2</DisplayName>
-    <Description xml:space="preserve">Empty VSIX Project. dakin</Description>
+    <Description xml:space="preserve">VSIX Project SSMS SpaceX</Description>
   </Metadata>
   <Installation AllUsers="true" InstalledByMsi="true">
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />

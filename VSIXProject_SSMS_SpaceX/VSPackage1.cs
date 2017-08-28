@@ -37,22 +37,21 @@ namespace VSIXProject2
     /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
     /// </para>
     /// </remarks>
+
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
+    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About  
     [Guid(VSPackage1.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // 插件加载时间
-    [ProvideAutoLoad(UIContextGuids80.ToolboxInitialized, PackageAutoLoadFlags.None)]
-    public sealed class VSPackage1 : Package
+    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string)]
+
+    public sealed class VSPackage1 : Package // Connect:Package
     {
         /// <summary>
         /// VSPackage1 GUID string.
         /// </summary>
         public const string PackageGuidString = "3b76e61c-fe19-493b-b881-23b5e4fc30a5";
-
-
-        private DTEEvents b;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VSPackage1"/> class.
@@ -62,7 +61,7 @@ namespace VSIXProject2
             // Inside this method you can place any initialization code that does not require
             // any Visual Studio service because at this point the package object is created but
             // not sited yet inside Visual Studio environment. The place to do all the other
-            // initialization is the Initialize method.
+            // initialization is the Initialize method.          
         }
 
         #region Package Members
@@ -81,11 +80,10 @@ namespace VSIXProject2
                 Command1.Initialize(this);
 
                 //  Connector c = new Connector();
-
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("VSPackage1.Initialize exceptio:" + ex.ToString());
             }
 
         }
