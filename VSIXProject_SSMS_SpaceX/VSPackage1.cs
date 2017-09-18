@@ -78,9 +78,8 @@ namespace VSIXProject2
 
             try
             {
-                MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
+               // MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
                 FireRocket();
-                // Reg setting is removed after initialize. Wait short delay then recreate it.
             }
             catch (Exception ex)
             {
@@ -130,6 +129,7 @@ namespace VSIXProject2
 
         private void AddSkipLoadingReg()
         {
+            // Reg setting is removed after initialize. Wait short delay then recreate it.
             var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
             myPackage.SetValue("SkipLoading", 1);
         }
