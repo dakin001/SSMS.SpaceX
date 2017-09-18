@@ -135,14 +135,21 @@ namespace VSIXProject2
             //CommandBarPopup menuSpaceX = (CommandBarPopup)tabContext.Controls.Add(MsoControlType.msoControlPopup, Type.Missing, Type.Missing, Type.Missing, true);
             //menuSpaceX.Caption = "SpaceX";
             //menuSpaceX.BeginGroup = true;
-            //var oControl = menuSpaceX.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, 1, true) as CommandBarButton;
-            var oControl = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
-            oControl.Caption = "===Save data to script===";
-            oControl.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
+            var btnSaveToScript = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
+            btnSaveToScript.Caption = "===Save data to script===";
+            btnSaveToScript.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
             {
                 Script();
             };
+
+            var btnSaveToExcel = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
+            btnSaveToExcel.Caption = "===Open As Excel===";
+            btnSaveToExcel.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
+            {
+                MessageBox.Show("待开发");
+            };
         }
+
 
         private void Script()
         {
