@@ -20,12 +20,12 @@ using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.CommandBars;
 
-namespace VSIXProject2
+namespace SSMSSpaceX
 {
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class Command1
+    public sealed class Command1
     {
         /// <summary>
         /// Command ID.
@@ -95,9 +95,10 @@ namespace VSIXProject2
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static void Initialize(Package package)
+        public static Command1 Initialize(Package package)
         {
             Instance = new Command1(package);
+            return Instance;
         }
 
         /// <summary>

@@ -3,6 +3,7 @@
 //     Copyright (c) Company.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
+extern alias SSMSSpaceX_Ssms2014;
 
 using System;
 using System.ComponentModel.Design;
@@ -17,6 +18,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using EnvDTE;
+using System.IO;
 
 namespace VSIXProject2
 {
@@ -44,8 +46,8 @@ namespace VSIXProject2
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // 插件加载时间
-    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string)]
-
+    //  [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     public sealed class VSPackage1 : Package // Connect:Package
     {
         /// <summary>
@@ -76,18 +78,43 @@ namespace VSIXProject2
 
             try
             {
-                //                MessageBox.Show("VSPackage1.Initialize");
-                Command1.Initialize(this);
-
+                MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
+                FireRocket();
                 // Reg setting is removed after initialize. Wait short delay then recreate it.
-                DelayAddSkipLoadingReg();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("VSPackage1.Initialize exceptio:" + ex.ToString());
             }
 
+            DelayAddSkipLoadingReg();
         }
+
+        private object FireRocket()
+        {
+            var ssmsInterfacesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SqlWorkbench.Interfaces.dll");
+
+            if (File.Exists(ssmsInterfacesPath))
+            {
+                var ssmsInterfacesVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(ssmsInterfacesPath);
+
+                switch (ssmsInterfacesVersion.FileMajorPart)
+                {
+                    //case 14:
+                    //    return new Ssms2017::SSMSSpaceX.Command1.Initialize(this);;
+                    case 13:
+                        return SSMSSpaceX.Command1.Initialize(this); ;
+                    case 12:
+                        return SSMSSpaceX_Ssms2014::SSMSSpaceX.Command1.Initialize(this); ;
+                    default:
+                        break;
+                }
+            }
+
+            return SSMSSpaceX.Command1.Initialize(this);
+
+        }
+
 
         private void DelayAddSkipLoadingReg()
         {
