@@ -11,7 +11,10 @@ D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv
 资料? https://sqljudo.wordpress.com/31-days-of-sql-server-management-studio/ssms-day-30-vspackage-and-ssms/
 
 Extensibility in Visual Studio
-https://msdn.microsoft.com/zh-CN/library/bb166030.aspx 
+https://msdn.microsoft.com/zh-CN/library/bb166030.aspx
+
+多版本差异化解决方案例子
+http://ssmsschemafolders.codeplex.com/SourceControl/latest#README.md
 
 ========
 
