@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSMSSpaceX.VSPackage", "VSIXProject_SSMS_SpaceX\SSMSSpaceX.VSPackage.csproj", "{9021149A-A7EA-4C50-BE0D-83C79CF18B60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSMSSpaceX.Ssms2014", "SSMSSpaceX.Ssms2014\SSMSSpaceX.Ssms2014.csproj", "{0923E7EA-E5A3-4866-B4D2-D16A7C0FAAC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9021149A-A7EA-4C50-BE0D-83C79CF18B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9021149A-A7EA-4C50-BE0D-83C79CF18B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9021149A-A7EA-4C50-BE0D-83C79CF18B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0923E7EA-E5A3-4866-B4D2-D16A7C0FAAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0923E7EA-E5A3-4866-B4D2-D16A7C0FAAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0923E7EA-E5A3-4866-B4D2-D16A7C0FAAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0923E7EA-E5A3-4866-B4D2-D16A7C0FAAC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
