@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSIXProject_SSMSSpaceX", "VSIXProject_SSMS_SpaceX\VSIXProject_SSMSSpaceX.csproj", "{9021149A-A7EA-4C50-BE0D-83C79CF18B60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSMSSpaceX.VSPackage", "VSIXProject_SSMS_SpaceX\SSMSSpaceX.VSPackage.csproj", "{9021149A-A7EA-4C50-BE0D-83C79CF18B60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49DFB439-2245-40FF-B92E-ED2D12EB0333}
 	EndGlobalSection
 EndGlobal

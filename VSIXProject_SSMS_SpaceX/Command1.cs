@@ -162,9 +162,12 @@ namespace VSIXProject2
 
             vf.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out obj);
             var control = obj as Control;
-            //   Microsoft.SqlServer.Management.UI.VSIntegration.Editors.SqlScriptEditorControl;
-            var gridControl = (GridControl)((ContainerControl)((ContainerControl)control).ActiveControl).ActiveControl;
-            ScriptGrid(gridControl);
+            if (control != null)
+            {
+                //   Microsoft.SqlServer.Management.UI.VSIntegration.Editors.SqlScriptEditorControl;
+                var gridControl = (GridControl)((ContainerControl)((ContainerControl)control).ActiveControl).ActiveControl;
+                ScriptGrid(gridControl);
+            } 
         }
 
         private void ScriptGrid(GridControl gridControl)

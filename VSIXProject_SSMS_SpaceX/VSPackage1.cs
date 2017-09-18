@@ -79,7 +79,8 @@ namespace VSIXProject2
                 //                MessageBox.Show("VSPackage1.Initialize");
                 Command1.Initialize(this);
 
-                //  Connector c = new Connector();
+                // Reg setting is removed after initialize. Wait short delay then recreate it.
+                DelayAddSkipLoadingReg();
             }
             catch (Exception ex)
             {
@@ -88,7 +89,23 @@ namespace VSIXProject2
 
         }
 
+        private void DelayAddSkipLoadingReg()
+        {
+            var delay = new Timer();
+            delay.Tick += delegate (object o, EventArgs e)
+            {
+                delay.Stop();
+                AddSkipLoadingReg();
+            };
+            delay.Interval = 1000;
+            delay.Start();
+        }
 
+        private void AddSkipLoadingReg()
+        {
+            var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
+            myPackage.SetValue("SkipLoading", 1);
+        }
 
         #endregion
     }
