@@ -134,7 +134,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\VSIXProject_SSMS_SpaceX\Command1.cs">
+    <Compile Include="..\SSMSSpaceX.VSPackage\Command1.cs">
       <Link>Command1.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
