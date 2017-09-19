@@ -46,8 +46,8 @@ namespace VSIXProject2
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // 插件加载时间
-    //  [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string)]
+    //  [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     public sealed class VSPackage1 : Package // Connect:Package
     {
         /// <summary>
@@ -83,10 +83,10 @@ namespace VSIXProject2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("VSPackage1.Initialize exceptio:" + ex.ToString());
+                MessageBox.Show("VSPackage1.Initialize exception:" + ex.ToString());
             }
 
-            //    DelayAddSkipLoadingReg();
+            DelayAddSkipLoadingReg();
         }
 
         private object FireRocket()
@@ -114,24 +114,26 @@ namespace VSIXProject2
         }
 
 
-        //private void DelayAddSkipLoadingReg()
-        //{
-        //    var delay = new Timer();
-        //    delay.Tick += delegate (object o, EventArgs e)
-        //    {
-        //        delay.Stop();
-        //        AddSkipLoadingReg();
-        //    };
-        //    delay.Interval = 1000;
-        //    delay.Start();
-        //}
+        private void DelayAddSkipLoadingReg()
+        {
+            var delay = new Timer()
+            {
+                Interval = 2000
+            };
+            delay.Tick += delegate (object o, EventArgs e)
+            {
+                delay.Stop();
+                AddSkipLoadingReg();
+            };
+            delay.Start();
+        }
 
-        //private void AddSkipLoadingReg()
-        //{
-        //    // Reg setting is removed after initialize. Wait short delay then recreate it.
-        //    var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
-        //    myPackage.SetValue("SkipLoading", 1);
-        //}
+        private void AddSkipLoadingReg()
+        {
+            // Reg setting is removed after initialize. Wait short delay then recreate it.
+            var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
+            myPackage.SetValue("SkipLoading", 1);
+        }
 
         #endregion
     }
