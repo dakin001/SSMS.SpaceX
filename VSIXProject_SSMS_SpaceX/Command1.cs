@@ -56,7 +56,7 @@ namespace SSMSSpaceX
 
             this.package = package;
 
-            CreateMenu();
+            //   CreateMenu();
             CreateGridMenu();
         }
 
@@ -111,7 +111,7 @@ namespace SSMSSpaceX
         private void MenuItemCallback(object sender, EventArgs e)
         {
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "Command1";
+            string title = "Command Test 1";
 
             // Show a message box to prove we were here
             VsShellUtilities.ShowMessageBox(
@@ -121,8 +121,6 @@ namespace SSMSSpaceX
                 OLEMSGICON.OLEMSGICON_INFO,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
-
-            Script();
         }
 
         private DTE2 DTE
@@ -137,22 +135,25 @@ namespace SSMSSpaceX
             //menuSpaceX.Caption = "SpaceX";
             //menuSpaceX.BeginGroup = true;
             var btnSaveToScript = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
-            btnSaveToScript.Caption = "===Save data to script===";
+            btnSaveToScript.Caption = "SpaceX: Save data to script";
             btnSaveToScript.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
             {
-                Script();
+                ScriptGrid(SetDocSql);
             };
 
             var btnSaveToExcel = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
-            btnSaveToExcel.Caption = "===Open As Excel===";
+            btnSaveToExcel.Caption = "SpaceX: Copy data script";
             btnSaveToExcel.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
             {
-                MessageBox.Show("待开发");
+                ScriptGrid(sql =>
+                {
+                    Clipboard.SetDataObject(sql);
+                });
             };
         }
 
 
-        private void Script()
+        private void ScriptGrid(Action<string> action = null)
         {
             var ms = this.ServiceProvider.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
 
@@ -167,11 +168,11 @@ namespace SSMSSpaceX
             {
                 //   Microsoft.SqlServer.Management.UI.VSIntegration.Editors.SqlScriptEditorControl;
                 var gridControl = (GridControl)((ContainerControl)((ContainerControl)control).ActiveControl).ActiveControl;
-                ScriptGrid(gridControl);
-            } 
+                GetGridScriptData(gridControl, action);
+            }
         }
 
-        private void ScriptGrid(GridControl gridControl)
+        private void GetGridScriptData(GridControl gridControl, Action<string> action)
         {
             if (gridControl == null)
             {
@@ -197,7 +198,7 @@ namespace SSMSSpaceX
                 result = $"-- INSERT INTO #tmp_GridResults ({string.Join(", ", columnHeaderList)})\r\n"
                     + $"select * from(values \r\n {result}\r\n) as T({string.Join(", ", columnHeaderList)})";
 
-                SetDocSql(result);
+                action(result);
             }
         }
 

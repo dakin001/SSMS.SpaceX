@@ -78,7 +78,7 @@ namespace VSIXProject2
 
             try
             {
-               // MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
+                // MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
                 FireRocket();
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace VSIXProject2
                 MessageBox.Show("VSPackage1.Initialize exceptio:" + ex.ToString());
             }
 
-            DelayAddSkipLoadingReg();
+            //    DelayAddSkipLoadingReg();
         }
 
         private object FireRocket()
@@ -101,9 +101,9 @@ namespace VSIXProject2
                 {
                     //case 14:
                     //    return new Ssms2017::SSMSSpaceX.Command1.Initialize(this);;
-                    case 13:
-                        return SSMSSpaceX.Command1.Initialize(this); ;
-                    case 12:
+                    case 13: // 2016 is default
+                        return SSMSSpaceX.Command1.Initialize(this);
+                    case 12: // 2014
                         return SSMSSpaceX_Ssms2014::SSMSSpaceX.Command1.Initialize(this); ;
                     default:
                         break;
@@ -111,28 +111,27 @@ namespace VSIXProject2
             }
 
             return SSMSSpaceX.Command1.Initialize(this);
-
         }
 
 
-        private void DelayAddSkipLoadingReg()
-        {
-            var delay = new Timer();
-            delay.Tick += delegate (object o, EventArgs e)
-            {
-                delay.Stop();
-                AddSkipLoadingReg();
-            };
-            delay.Interval = 1000;
-            delay.Start();
-        }
+        //private void DelayAddSkipLoadingReg()
+        //{
+        //    var delay = new Timer();
+        //    delay.Tick += delegate (object o, EventArgs e)
+        //    {
+        //        delay.Stop();
+        //        AddSkipLoadingReg();
+        //    };
+        //    delay.Interval = 1000;
+        //    delay.Start();
+        //}
 
-        private void AddSkipLoadingReg()
-        {
-            // Reg setting is removed after initialize. Wait short delay then recreate it.
-            var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
-            myPackage.SetValue("SkipLoading", 1);
-        }
+        //private void AddSkipLoadingReg()
+        //{
+        //    // Reg setting is removed after initialize. Wait short delay then recreate it.
+        //    var myPackage = this.UserRegistryRoot.CreateSubKey(@"Packages\{" + PackageGuidString + "}");
+        //    myPackage.SetValue("SkipLoading", 1);
+        //}
 
         #endregion
     }
