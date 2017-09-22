@@ -141,19 +141,34 @@ namespace SSMSSpaceX
                 ScriptGrid(SetDocSql);
             };
 
-            var btnSaveToExcel = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
-            btnSaveToExcel.Caption = "SpaceX: Copy data script";
-            btnSaveToExcel.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
+            var btnScriptToClipboard = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
+            btnScriptToClipboard.Caption = "SpaceX: Copy data script";
+            btnScriptToClipboard.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
             {
                 ScriptGrid(sql =>
                 {
                     Clipboard.SetDataObject(sql);
                 });
             };
+
+            //var btnReverseCopy = tabContext.Controls.Add(MsoControlType.msoControlButton, Type.Missing, Type.Missing, Type.Missing, true) as CommandBarButton;
+            //btnReverseCopy.Caption = "SpaceX: Reverse Copy";
+            //btnReverseCopy.Click += (CommandBarButton Ctrl, ref bool CancelDefault) =>
+            //{
+            //    var gridControl = GetCurrentGridControl();
+            //    if (gridControl != null)
+            //    {
+            //        GetGridSelectedData(gridControl);
+            //    }
+
+            //    var data = GetGridSelectedData(gridControl);
+            //    Clipboard.SetDataObject(data);
+
+            //};
         }
 
 
-        private void ScriptGrid(Action<string> action = null)
+        private GridControl GetCurrentGridControl()
         {
             var ms = this.ServiceProvider.GetService(typeof(IVsMonitorSelection)) as IVsMonitorSelection;
 
@@ -168,6 +183,17 @@ namespace SSMSSpaceX
             {
                 //   Microsoft.SqlServer.Management.UI.VSIntegration.Editors.SqlScriptEditorControl;
                 var gridControl = (GridControl)((ContainerControl)((ContainerControl)control).ActiveControl).ActiveControl;
+                return gridControl;
+            }
+
+            return null;
+        }
+
+        private void ScriptGrid(Action<string> action = null)
+        {
+            var gridControl = GetCurrentGridControl();
+            if (gridControl != null)
+            {
                 GetGridScriptData(gridControl, action);
             }
         }
@@ -249,6 +275,51 @@ namespace SSMSSpaceX
                 data.Add(row);
             }
         }
+
+        //private static string GetGridSelectedData(GridControl gridControl)
+        //{
+        //    int columnsNumber = gridControl.ColumnsNumber;
+        //    long totalRows = gridControl.GridStorage.NumRows();
+
+        //    var columnHeaderList = new List<string>(columnsNumber);
+        //    for (int j = 1; j < columnsNumber; j++)
+        //    {
+        //        string text;
+        //        gridControl.GetHeaderInfo(j, out text, out Bitmap bitmap);
+        //        if (columnHeaderList.Contains("[" + text + "]"))
+        //        {
+        //            text = text + "_" + j.ToString();
+        //        }
+        //        columnHeaderList.Add("[" + text + "]");
+        //    }
+
+        //    StringBuilder sb = new StringBuilder();
+
+
+        //    foreach (BlockOfCells cell in gridControl.SelectedCells)
+        //    {
+        //        string cellText = gridControl.GridStorage.GetCellDataAsString(cell.X, (int)cell.Y) ?? "";
+        //        cellText = cellText.Replace("'", "''");
+        //        if (true)
+        //        {
+        //            cellText = cellText.Trim();
+        //        }
+        //        if (cellText.Equals("NULL", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            //if (!true)
+        //            //{
+        //            //    cellText = "'" + cellText + "'";
+        //            //}
+        //        }
+        //        else
+        //        {
+        //            cellText = "N'" + cellText + "'";
+        //        }
+        //    }
+
+        //    return sb.ToString();
+        //}
+
 
         private string GetExecSQL()
         {
