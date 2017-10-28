@@ -78,15 +78,14 @@ namespace VSIXProject2
 
             try
             {
-                // MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
+                //MessageBox.Show("SSMS.SpaceX VSPackage1.Initialize");
                 FireRocket();
+                DelayAddSkipLoadingReg();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("VSPackage1.Initialize exception:" + ex.ToString());
             }
-
-            DelayAddSkipLoadingReg();
         }
 
         private object FireRocket()
